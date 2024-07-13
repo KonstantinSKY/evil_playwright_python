@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import Playwright, sync_playwright, expect
 from .utils import navigate_and_wait  # Ensure this import statement is correct
+import common
 
 # Fixture to navigate to the page and wait for it to load
 @pytest.fixture(scope="session")
@@ -12,24 +13,29 @@ def page(context):
     page.close()
 
 
+
+
+
 # Test functions using the pre-loaded page fixture
 def test_example_page_title(page):
+    common.check_page_title(page, "Basic Web Page Title")
+    
     # Check if the title contains "Example Domain"
-    expect(page).to_have_title("Basic Web Page Title")
+#     expect(page).to_have_title("Basic Web Page Title")
 
-    title = page.title()
-    assert title == "Basic Web Page Title", "Expected title to be 'Basic Web Page Title'."
+#     title = page.title()
+#     assert title == "Basic Web Page Title", "Expected title to be 'Basic Web Page Title'."
  
-   # Check title length (aligned with SEO best practices)
-    min_length = 10
-    max_length = 60
-    title_length = len(title())
-    assert min_length <= title_length <= max_length, f"Expected title length to be between {min_length} and {max_length} characters, but got {title_length} characters."
+#    # Check title length (aligned with SEO best practices)
+#     min_length = 10
+#     max_length = 60
+#     title_length = len(title())
+#     assert min_length <= title_length <= max_length, f"Expected title length to be between {min_length} and {max_length} characters, but got {title_length} characters."
 
-    # Check for no leading or trailing whitespace
-    # assert title == title.strip(), f"Expected title to have no leading or trailing whitespace, but got '{title}'."
-    assert title == title.rstrip(), f"Expected title to have no trailing whitespace, but got '{title}'."
-    assert title == title.lstrip(), f"Expected title to have no leading whitespace, but got '{title}'."
+#     # Check for no leading or trailing whitespace
+#     # assert title == title.strip(), f"Expected title to have no leading or trailing whitespace, but got '{title}'."
+#     assert title == title.rstrip(), f"Expected title to have no trailing whitespace, but got '{title}'."
+#     assert title == title.lstrip(), f"Expected title to have no leading whitespace, but got '{title}'."
     
 
 
