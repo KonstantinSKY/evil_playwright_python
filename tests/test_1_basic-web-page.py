@@ -3,15 +3,15 @@ from playwright.sync_api import Playwright, sync_playwright, expect
 from .utils import navigate_and_wait  # Ensure this import statement is correct
 from . import common
 
+URL = "https://testpages.eviltester.com/styled/basic-web-page-test.html"
+
 
 # Fixture to navigate to the page and wait for it to load
 @pytest.fixture(scope="session")
 def page(context):
     page = context.new_page()
-    navigate_and_wait(
-        page, "https://testpages.eviltester.com/styled/basic-web-page-test.html"
-    )
-    print("Navigated to the webpage.")
+    navigate_and_wait(page, URL)
+    print("Navigated to the webpage: ", URL)
     yield page
     page.close()
 
@@ -35,14 +35,19 @@ def test_app_navigation_links(page):
         "page?app=basicwebpageexample&t=About",
     )
 
-def test_footer_links(page):
-    common.check_link(page, 'div.page-footer a:nth-of-type(1)', 'https://eviltester.com')
-    common.check_link(page, 'div.page-footer a:nth-of-type(2)', 'https://compendiumdev.co.uk')
 
-    footer_links = page.query_selector_all('div.page-footer a')
+def test_footer_links(page):
+    common.check_link(
+        page, "div.page-footer a:nth-of-type(1)", "https://eviltester.com"
+    )
+    common.check_link(
+        page, "div.page-footer a:nth-of-type(2)", "https://compendiumdev.co.uk"
+    )
+
+    footer_links = page.query_selector_all("div.page-footer a")
     assert len(footer_links) == 2
-    assert footer_links[0].get_attribute('href') == "https://eviltester.com"
-    assert footer_links[1].get_attribute('href') == "https://compendiumdev.co.uk"
+    assert footer_links[0].get_attribute("href") == "https://eviltester.com"
+    assert footer_links[1].get_attribute("href") == "https://compendiumdev.co.uk"
 
 
 def test_example_page_heading(page):
