@@ -1,8 +1,7 @@
 import pytest
 from playwright.sync_api import Playwright, sync_playwright, expect
 from .utils import navigate_and_wait  # Ensure this import statement is correct
-import common
-
+from . import common
 # Fixture to navigate to the page and wait for it to load
 @pytest.fixture(scope="session")
 def page(context):
@@ -19,6 +18,7 @@ def page(context):
 # Test functions using the pre-loaded page fixture
 def test_example_page_title(page):
     common.check_page_title(page, "Basic Web Page Title")
+
     
     # Check if the title contains "Example Domain"
 #     expect(page).to_have_title("Basic Web Page Title")

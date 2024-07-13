@@ -1,4 +1,4 @@
-
+from playwright.sync_api import Playwright, sync_playwright, expect
 
 
 # Configs
@@ -6,7 +6,7 @@ MIN_LENGTH = 10
 MAX_LENGTH = 60
 
 
-def check_page_title(page, expected_title, min_length=MIN_LENGTH, max_length=MIN_LENGTH):
+def check_page_title(page, expected_title, min_length=MIN_LENGTH, max_length=MAX_LENGTH):
     """
     Check various properties of the page title.
 
